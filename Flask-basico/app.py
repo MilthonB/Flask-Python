@@ -9,3 +9,26 @@ app = Flask(__name__)
 def hello(name):
     print(name)
     return f"Hello, {escape(name)}!"
+
+# Tipos de convertidores 
+    """
+        string
+        int
+        float
+        path
+        uuid
+    """
+    
+ 
+#Reglas de variables   
+@app.route('/user/<username>')
+def username(username):
+    ...
+    
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    ...
+    
+@app.route('/path/<path:subpath>')
+def method_name(subpath):
+    ...
