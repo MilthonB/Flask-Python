@@ -32,3 +32,12 @@ def post(post_id):
 @app.route('/path/<path:subpath>')
 def method_name(subpath):
     ...
+    
+# Regla de dos diagonales o una 
+@app.route('/projects/')
+def projects():
+    return 'The project page'
+
+@app.route('/about')
+def about():
+    return 'The about page'
