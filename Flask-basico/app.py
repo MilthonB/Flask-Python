@@ -53,7 +53,7 @@ def index():
 def login():
     return 'login'
 
-@app.route('/user/<username>')
+@app.route('/user1/<username>')
 def profile(username):
     return f'{username}\'s profile'
 
