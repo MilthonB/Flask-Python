@@ -1,5 +1,5 @@
 from urllib import response
-from flask import Flask, request, Response, Request
+from flask import Flask, render_template, request, Response, Request
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -88,7 +88,9 @@ def multiplica(numero):
 def mostar_edad(edad):
     return f'La edad es de {edad}'
 
-@app.route('/metodo/<metodo>', methodos=['GET', 'POST'])
-def metodo(metodo):
-    return f'El metodo es {metodo}'
-    
+
+
+
+@app.route('/render')
+def render():
+    return render_template('index.html')
