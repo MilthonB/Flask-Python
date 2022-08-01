@@ -96,4 +96,4 @@ def metodow(metodow):
 def render():
     # De esta forma se pasan parametros al html
     # Es el arhivo y luego la calve y el valor 
-    return render_template('index.html', valor=2)
+    return render_template('index.html', valor=2)  
