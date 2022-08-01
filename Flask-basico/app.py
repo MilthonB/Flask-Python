@@ -1,5 +1,5 @@
 from urllib import response
-from flask import Flask, render_template, request, Response, Request
+from flask import Flask, redirect, render_template, request, Response, Request
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -97,3 +97,8 @@ def render():
     # De esta forma se pasan parametros al html
     # Es el arhivo y luego la calve y el valor 
     return render_template('index.html', valor=2)  
+
+
+@app.route('/redireccion')
+def redireccion():
+    return redirect( url_for('metodow', metodow='GET'))
