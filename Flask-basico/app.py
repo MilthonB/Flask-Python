@@ -1,5 +1,6 @@
+from os import abort
 from urllib import response
-from flask import Flask, redirect, render_template, request, Response, Request
+from flask import Flask, redirect, render_template, request, Response, Request, abort
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -102,3 +103,11 @@ def render():
 @app.route('/redireccion')
 def redireccion():
     return redirect( url_for('metodow', metodow='GET'))
+
+@app.route('/salir')
+def salir():
+    return abort(404)
+
+@app.errorhandler(404)
+def pagina_no_encontrada(error):
+    return render_template('error404.html', error=error),404
