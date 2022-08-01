@@ -92,9 +92,8 @@ def mostar_edad(edad):
 def metodow(metodow):
     return f'El metodo es {metodow}'
     
-
-
-
 @app.route('/render')
 def render():
-    return render_template('index.html')
+    # De esta forma se pasan parametros al html
+    # Es el arhivo y luego la calve y el valor 
+    return render_template('index.html', nombre=2)
