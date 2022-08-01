@@ -1,6 +1,7 @@
+from crypt import methods
 from os import abort
 from urllib import response
-from flask import Flask, redirect, render_template, request, Response, Request, abort
+from flask import Flask, jsonify, redirect, render_template, request, Response, Request, abort
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -111,3 +112,11 @@ def salir():
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
     return render_template('error404.html', error=error),404
+
+
+# REST Representational state tranfer
+@app.route('/api/mostrar/<nombre>', methods=['GET', 'POST'])
+def mostrar_nombre(nombre):
+    # En este caso el jsonify no es necesario usarlo proque la respuesta es un 
+    # diccionario
+    return {"nombre":nombre, "metodo":request.method}
