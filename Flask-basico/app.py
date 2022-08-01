@@ -1,4 +1,5 @@
-from flask import Flask
+from urllib import response
+from flask import Flask, request, Response, Request
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -47,8 +48,9 @@ def about():
 # Creacion de endpoint y sus elementos
 @app.route('/')
 def index():
-    # Mensajes a niveles
-    app.logger.debug("Mensaje a nivel de Debug")
+    # Mensajes a nivele consola 
+    app.logger.debug(f"Path del endpoint: {request.path}")
+    app.logger.debug(f"Mensaje a nivel de Debug {request.path}")
     app.logger.info("Mensaje a nivel de Debug")
     app.logger.warn("Mensaje a nivel de Debug")
     app.logger.error("Mensaje a nivel de Debug")
@@ -67,3 +69,17 @@ with app.test_request_context():
     print(url_for('login'))
     print(url_for('login', next='/'))
     print(url_for('profile', username='John Doe'))
+    
+@app.route('/saludard')
+def saludar():
+    return 'Hola, estoy saludando'
+
+@app.route('/saludar/<nombre>')
+def saludar_nombre(nombre):
+    return f'Hola, estoy saludand, soy: {nombre}'
+
+
+# Todos los return deben de ser strings
+@app.route('/multi/<int:numero>')
+def multiplica(numero):
+    return f'{2*numero}'
