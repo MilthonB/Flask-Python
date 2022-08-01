@@ -83,3 +83,7 @@ def saludar_nombre(nombre):
 @app.route('/multi/<int:numero>')
 def multiplica(numero):
     return f'{2*numero}'
+
+@app.route('/edad/<int:edad>')
+def mostar_edad(edad):
+    return f'La edad es de {edad}'
