@@ -47,6 +47,11 @@ def about():
 # Creacion de endpoint y sus elementos
 @app.route('/')
 def index():
+    # Mensajes a niveles
+    app.logger.debug("Mensaje a nivel de Debug")
+    app.logger.info("Mensaje a nivel de Debug")
+    app.logger.warn("Mensaje a nivel de Debug")
+    app.logger.error("Mensaje a nivel de Debug")
     return 'index'
 
 @app.route('/login')
