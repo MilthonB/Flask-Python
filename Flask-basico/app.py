@@ -87,3 +87,8 @@ def multiplica(numero):
 @app.route('/edad/<int:edad>')
 def mostar_edad(edad):
     return f'La edad es de {edad}'
+
+@app.route('/metodo/<metodo>', methodos=['GET', 'POST'])
+def metodo(metodo):
+    return f'El metodo es {metodo}'
+    
