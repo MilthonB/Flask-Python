@@ -1,7 +1,7 @@
 from crypt import methods
 from os import abort
 from urllib import response
-from flask import Flask, jsonify, redirect, render_template, request, Response, Request, abort
+from flask import Flask, jsonify, redirect, render_template, request, Response, Request, abort, session
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
@@ -56,13 +56,19 @@ def about():
 # Creacion de endpoint y sus elementos
 @app.route('/')
 def index():
+    
+    if 'username' in session:
+        return 'El usuario ya ha hecho login'
+    return 'El usuario no ha hecho login'
+    
+    
     # Mensajes a nivele consola 
     app.logger.debug(f"Path del endpoint: {request.path}")
     app.logger.debug(f"Mensaje a nivel de Debug {request.path}")
     app.logger.info("Mensaje a nivel de Debug")
     app.logger.warn("Mensaje a nivel de Debug")
     app.logger.error("Mensaje a nivel de Debug")
-    return 'index'
+    return 'infrdex'
 
 @app.route('/login')
 def login():
@@ -129,7 +135,12 @@ def mostrar_nombre(nombre):
 
 @app.route('/home/<usuario>')
 def home(usuario):
-    return render_template('home.html', usuario=usuario)
+    if 'username' in session:
+        return render_template('home.html', usuario=usuario)
+    return 'El usuario no ha hecho login'
+    
+    
+    
 
 @app.route('/api/login')
 def login2():
@@ -138,3 +149,21 @@ def login2():
     
     return redirect( url_for('home', usuario=usuario) )
     
+    
+@app.route('/login/try', methods=['GET', 'POST'])
+def login_try():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('home', usuario=request.form['username']))
+    return '''
+        <form method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('index'))
