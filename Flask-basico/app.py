@@ -5,9 +5,15 @@ from flask import Flask, jsonify, redirect, render_template, request, Response, 
 import flask
 from flask import url_for
 from markupsafe import escape, Markup
+import os 
 
 app = Flask(__name__)
 
+
+app.secret_key = b'as1d5a1f)(=/561)/(&hn'
+
+# Llave que protege a los cockies
+app.secret_key = os.urandom(16)
 
 @app.route('/<name>')
 def hello(name):
@@ -120,3 +126,15 @@ def mostrar_nombre(nombre):
     # En este caso el jsonify no es necesario usarlo proque la respuesta es un 
     # diccionario
     return {"nombre":nombre, "metodo":request.method}
+
+@app.route('/home/<usuario>')
+def home(usuario):
+    return render_template('home.html', usuario=usuario)
+
+@app.route('/api/login')
+def login2():
+    usuario = 'Samuel'
+    password = 123
+    
+    return redirect( url_for('home', usuario=usuario) )
+    
